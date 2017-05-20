@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Test Project with Relations Install Package Description
+ *
+ * PHP version 5.3
+ *
+ * @version    1.0.0
+ * @package    AllRelationsProject
+ * @author     Niels Braczek <nbraczek@bsds.de>
+ * @copyright  Copyright (C)2017 BSDS Braczek Software- und DatenSysteme. All rights reserved.
+ * @license    MIT
+ */
+-->
+<extension type="component" version="3.2.0" method="upgrade">
+
+    <name>COM_ALL_RELATIONS_PROJECT</name>
+    <creationDate>May 2017</creationDate>
+    <author>Niels Braczek</author>
+    <authorEmail>nbraczek@bsds.de</authorEmail>
+    <authorUrl>www.bsds.de</authorUrl>
+    <copyright>(C)2017 BSDS Braczek Software- und DatenSysteme. All rights reserved</copyright>
+    <license>MIT</license>
+    <version>1.0.0</version>
+    <description>COM_ALL_RELATIONS_PROJECT_XML_DESCRIPTION</description>
+
+    <update>
+        <schemas>
+            <schemapath type="mysql">sql/updates/mysql</schemapath>
+        </schemas>
+    </update>
+
+    <files folder="site">
+        <filename>index.html</filename>
+        <filename>all_relations_project.php</filename>
+    </files>
+
+    <administration>
+        <menu link='index.php?option=com_all_relations_project'>COM_ALL_RELATIONS_PROJECT</menu>
+
+        <files folder="admin">
+            <filename>index.html</filename>
+            <filename>all_relations_project.php</filename>
+            <folder>sql</folder>
+        </files>
+    </administration>
+
+</extension>
