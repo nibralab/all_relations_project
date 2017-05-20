@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jedupdate version="1">
 	<core_body>A minimal test project containing all types of relations</core_body>
-	<homepage_link>https://github.com/</homepage_link>
-	<download_link>https://github.com//releases</download_link>
+	<homepage_link>https://github.com/nibralab/all_relations_project</homepage_link>
+	<download_link>https://github.com/nibralab/all_relations_project/releases</download_link>
 	<documentation_link></documentation_link>
 	<support_link></support_link>
 	<license_link></license_link>

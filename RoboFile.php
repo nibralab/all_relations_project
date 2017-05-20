@@ -283,20 +283,6 @@ class RoboFile extends \Robo\Tasks
 	 */
 	public function runChecker($tool = null)
 	{
-		if ($tool === null)
-		{
-			$this->say('You have to specify a tool name as argument. Valid tools are phpmd, phpcs, phpcpd.');
-
-			return false;
-		}
-
-		if (!in_array($tool, array('phpmd', 'phpcs', 'phpcpd')))
-		{
-			$this->say('The tool you required is not known. Valid tools are phpmd, phpcs, phpcpd.');
-
-			return false;
-		}
-
 		switch ($tool)
 		{
 			case 'phpmd':
@@ -307,6 +293,16 @@ class RoboFile extends \Robo\Tasks
 
 			case 'phpcpd':
 				return $this->runPhpcpd();
+
+			case null:
+				$this->say('You have to specify a tool name as argument. Valid tools are phpmd, phpcs, phpcpd.');
+
+				return false;
+
+			default:
+				$this->say('The tool you required is not known. Valid tools are phpmd, phpcs, phpcpd.');
+
+				return false;
 		}
 	}
 
