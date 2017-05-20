@@ -1,0 +1,19 @@
+# Builds
+build
+releases
+
+# Github pages and Jekyll files
+/_site/
+/Gemfile
+/Gemfile.lock
+
+tests/_support/_generated/*TesterActions.php
+tests/joomla*
+tests/_output*
+selenium.log
+tests/cache
+
+# Package building related
+/dist
+jorobo.ini
+

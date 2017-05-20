@@ -12,6 +12,8 @@
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
  */
 
+use joomla_projects\robo\WaitForSeleniumStandaloneServer;
+
 require_once 'vendor/autoload.php';
 
 if (!defined('JPATH_BASE'))
@@ -74,10 +76,21 @@ class RoboFile extends \Robo\Tasks
 		date_default_timezone_set('UTC');
 	}
 
+		/**
+	 * @return WaitForSeleniumStandaloneServer
+	 */
+	protected function taskWaitForSeleniumStandaloneServer()
+	{
+		$waitForSeleniumStandaloneServer = new WaitForSeleniumStandaloneServer();
+		$waitForSeleniumStandaloneServer->setLogger(Robo\Robo::logger());
+
+		return $waitForSeleniumStandaloneServer;
+	}
+
 	/**
 	 * Get the executable extension according to Operating System
 	 *
-	 * @return void
+	 * @return string
 	 */
 	private function getExecutableExtension()
 	{
@@ -105,7 +118,7 @@ class RoboFile extends \Robo\Tasks
 	 *          - 'use-htaccess': renames and enable embedded Joomla .htaccess file
 	 *          - 'env': set a specific environment to get configuration from
 	 *
-	 * @return mixed
+	 * @return void
 	 */
 	public function runTests($opts = ['use-htaccess' => false, 'env' => 'desktop'])
 	{
@@ -165,7 +178,7 @@ class RoboFile extends \Robo\Tasks
 	 * @param   string  $pathToTestFile  Optional name of the test to be run
 	 * @param   string  $suite           Optional name of the suite containing the tests, Acceptance by default.
 	 *
-	 * @return mixed
+	 * @return void
 	 */
 	public function runTest($pathToTestFile = null, $suite = 'acceptance')
 	{
@@ -302,7 +315,7 @@ class RoboFile extends \Robo\Tasks
 	 *
 	 * @param   bool  $use_htaccess  (1/0) Rename and enable embedded Joomla .htaccess file
 	 *
-	 * @return  bool
+	 * @return  void
 	 */
 	public function createTestingSite($use_htaccess = false)
 	{
@@ -474,7 +487,7 @@ class RoboFile extends \Robo\Tasks
 	private function getComposer()
 	{
 		// Make sure we have Composer
-		if (!file_exists('./composer.phar'))
+		if (!$this->_exec('composer --version')->getMessage() && !file_exists('./composer.phar'))
 		{
 			$insecure = '';
 
@@ -504,31 +517,31 @@ class RoboFile extends \Robo\Tasks
 	/**
 	 * Run the phpmd tool
 	 *
-	 * @return  void
+	 * @return  bool
 	 */
 	private function runPhpmd()
 	{
-		return $this->_exec('phpmd' . $this->extension . ' ' . __DIR__ . '/src xml cleancode,codesize,controversial,design,naming,unusedcode');
+		return $this->_exec('phpmd' . $this->extension . ' ' . __DIR__ . '/src xml cleancode,codesize,controversial,design,naming,unusedcode')->wasSuccessful();
 	}
 
 	/**
 	 * Run the phpcs tool
 	 *
-	 * @return  void
+	 * @return  bool
 	 */
 	private function runPhpcs()
 	{
-		$this->_exec('phpcs' . $this->extension . ' ' . __DIR__ . '/src');
+		return $this->_exec('phpcs' . $this->extension . ' ' . __DIR__ . '/src')->wasSuccessful();
 	}
 
 	/**
 	 * Run the phpcpd tool
 	 *
-	 * @return  void
+	 * @return  bool
 	 */
 	private function runPhpcpd()
 	{
-		$this->_exec('phpcpd' . $this->extension . ' ' . __DIR__ . '/src');
+        return $this->_exec('phpcpd' . $this->extension . ' ' . __DIR__ . '/src')->wasSuccessful();
 	}
 
 	/**
