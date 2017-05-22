@@ -11,8 +11,8 @@ foreach ($info as $instance)
 {
 	$volume = str_replace(__DIR__ . '/', '', $instance['volume']);
 
-	echo "{$instance['name']}:\n";
+	echo "\n{$instance['name']}:\n";
     echo " - domain: {$instance['url']}\n";
 	echo " - files:  {$volume}\n";
-	echo "\n";
+	echo " - tests:  build/dockyard/selenium/{$instance['url']}/tests\n";
 }
