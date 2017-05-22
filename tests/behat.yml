@@ -1,8 +1,15 @@
 default:
-    suites:
-        web_features:
-            paths:    [ acceptance/features/web ]
-            contexts: [ WebContext ]
-        api_features:
-            paths:    [ acceptance/features/api ]
-            contexts: [ ApiContext ]
+  suites:
+    web_features:
+      paths:    [ acceptance/features/web ]
+      contexts: [ WebContext ]
+    api_features:
+      paths:    [ acceptance/features/api ]
+      contexts: [ ApiContext ]
+  extensions:
+    Behat\MinkExtension:
+      base_url:  'http://tweetdig.dev'
+      default_session: selenium2
+      browser_name: 'firefox'
+      selenium2:
+        capabilities: {"browser": "firefox"}
