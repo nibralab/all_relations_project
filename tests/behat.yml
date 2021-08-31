@@ -6,3 +6,9 @@ default:
         api_features:
             paths:    [ acceptance/features/api ]
             contexts: [ ApiContext ]
+    extensions:
+        Behat\MinkExtension:
+            base_url: localhost
+            default_session: selenium2
+            browser_name: firefox
+            selenium2: { capabilities: { browser: firefox } }
